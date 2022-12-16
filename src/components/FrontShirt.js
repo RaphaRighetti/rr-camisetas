@@ -18,9 +18,9 @@ export default function FrontShirt() {
       width: 6.5,
     };
     if (parseFloat(window.innerWidth) < IMG_WIDTH) {
-      setXAxis(`${window.innerWidth / conversion.x}`);
-      setYAxis(`${window.innerWidth / conversion.y}`);
-      setWidthAxis(`${window.innerWidth / conversion.width}`);
+      setXAxis(`${Math.round(window.innerWidth / conversion.x)}`);
+      setYAxis(`${Math.round(window.innerWidth / conversion.y)}`);
+      setWidthAxis(`${Math.round(window.innerWidth / conversion.width)}`);
     }
   }, []);
 
@@ -38,60 +38,60 @@ export default function FrontShirt() {
 
   return (
     <main className={ styles.main }>
-      <div>
+      <div className={ styles.inputContainer }>
         <input
           type="color"
           value={ color }
           onChange={ handleColor }
           className={ styles.color }
         />
-      </div>
-      <div className={ styles.inputBox }>
-        <TextField
-          id="standard-number"
-          label="x"
-          type="number"
-          variant="standard"
-          className={ styles.input }
-          value={ xAxis }
-          onChange={ ({ target }) => setXAxis(target.value) }
-        />
-        <TextField
-          id="standard-number"
-          label="y"
-          type="number"
-          variant="standard"
-          className={ styles.input }
-          value={ yAxis }
-          onChange={ ({ target }) => setYAxis(target.value) }
-        />
-        <TextField
-          id="standard-number"
-          label="width"
-          type="number"
-          variant="standard"
-          className={ styles.input }
-          value={ widthAxis }
-          onChange={ ({ target }) => setWidthAxis(target.value) }
-        />
-      </div>
-      <div className={ styles.inputBox }>
-        <TextField
-          label="Image URL"
-          type="text"
-          variant="standard"
-          value={ imgUrl }
-          onChange={ ({ target }) => setImgUrl(target.value) }
-          className={ styles.inputImage }
-        />
-        <Button
-          variant="contained"
-          disableElevation
-          className={ styles.button }
-          onClick={ handleButton }
-        >
-          Change image
-        </Button>
+        <div className={ styles.inputBox }>
+          <TextField
+            id="standard-number"
+            label="x"
+            type="number"
+            variant="standard"
+            className={ styles.input }
+            value={ xAxis }
+            onChange={ ({ target }) => setXAxis(target.value) }
+          />
+          <TextField
+            id="standard-number"
+            label="y"
+            type="number"
+            variant="standard"
+            className={ styles.input }
+            value={ yAxis }
+            onChange={ ({ target }) => setYAxis(target.value) }
+          />
+          <TextField
+            id="standard-number"
+            label="width"
+            type="number"
+            variant="standard"
+            className={ styles.input }
+            value={ widthAxis }
+            onChange={ ({ target }) => setWidthAxis(target.value) }
+          />
+        </div>
+        <div className={ styles.inputBox }>
+          <TextField
+            label="Image URL"
+            type="text"
+            variant="standard"
+            value={ imgUrl }
+            onChange={ ({ target }) => setImgUrl(target.value) }
+            className={ styles.inputImage }
+          />
+          <Button
+            variant="contained"
+            disableElevation
+            className={ styles.button }
+            onClick={ handleButton }
+          >
+            Change image
+          </Button>
+        </div>
       </div>
       <div className={ styles.shirtBox } style={ { backgroundColor: color } }>
         <img src="/camisetaLisa.png" alt="shirt" className={ styles.shirtImg } />

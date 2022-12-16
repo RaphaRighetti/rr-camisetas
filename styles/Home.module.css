@@ -39,7 +39,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin: 2px 0;
+  margin: 4px 0;
   padding: 0 16px;
 }
 
@@ -52,7 +52,32 @@
   padding: 0 6px;
 }
 
+
 .color {
   background-color: transparent;
   border: none;
+}
+
+.inputContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+@media ( width >= 1280px ) {
+
+  .main {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .shirtBox {
+    height: 660px;
+    width: 660px;
+  }
+
+  .shirtImg {
+    width: 660px;
+  }
+
 }
