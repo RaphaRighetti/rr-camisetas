@@ -1,3 +1,4 @@
 {
+  "ignorePatterns": ["_app.js", "_document.js", "/pages/api/*.js"],
   "extends": "trybe-frontend"
 }
