@@ -1,4 +1,5 @@
 import { Button, TextField } from '@mui/material';
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import styles from '../../styles/Home.module.css';
 
@@ -12,6 +13,7 @@ export default function FrontShirt() {
 
   useEffect(() => {
     const IMG_WIDTH = 520;
+    const VIEW_PORT_HIGH = 1280;
     const conversion = {
       x: 1.8,
       y: 3.25,
@@ -21,6 +23,11 @@ export default function FrontShirt() {
       setXAxis(`${Math.round(window.innerWidth / conversion.x)}`);
       setYAxis(`${Math.round(window.innerWidth / conversion.y)}`);
       setWidthAxis(`${Math.round(window.innerWidth / conversion.width)}`);
+    }
+    if (parseFloat(window.innerWidth) >= VIEW_PORT_HIGH) {
+      setXAxis('360');
+      setYAxis('190');
+      setWidthAxis('110');
     }
   }, []);
 
@@ -74,7 +81,7 @@ export default function FrontShirt() {
             onChange={ ({ target }) => setWidthAxis(target.value) }
           />
         </div>
-        <div className={ styles.inputBox }>
+        <div className={ styles.inputBoxTwo }>
           <TextField
             label="Image URL"
             type="text"
@@ -94,12 +101,13 @@ export default function FrontShirt() {
         </div>
       </div>
       <div className={ styles.shirtBox } style={ { backgroundColor: color } }>
-        <img src="/camisetaLisa.png" alt="shirt" className={ styles.shirtImg } />
+        <Image src="/camisetaLisa.png" alt="shirt" className={ styles.shirtImg } fill />
         <img
           src={ logo }
           alt="logo"
-          className={ styles.logoImg }
+          fill
           style={ { left: `${xAxis}px`, top: `${yAxis}px`, width: `${widthAxis}px` } }
+          className={ styles.logoImg }
         />
       </div>
     </main>
