@@ -1,4 +1,4 @@
 {
-  "ignorePatterns": ["_app.js", "_document.js", "/pages/api/*.js", "/src/components/FrontShirt.js", "/src/components/BackShirt.js"],
+  // "ignorePatterns": ["_app.js", "_document.js", "/pages/api/*.js", "/src/components/FrontShirt.js", "/src/components/BackShirt.js"],
   "extends": ["trybe-frontend", "plugin:@next/next/recommended"]
 }

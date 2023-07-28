@@ -1,6 +1,5 @@
 .main {
   align-items: center;
-  background-color: white;
   display: flex;
   flex-direction: column;
   padding-top: 8px;
@@ -52,6 +51,47 @@
   padding: 0 16px;
 }
 
+.inputBoxThree {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  margin: 12px 0;
+}
+
+.uploadButton {
+  background-color: #1976d2;
+  border-radius: 4px;
+  color: white;
+  font-family: Roboto , Helvetica , Arial , sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 8px 16px;
+  text-transform: uppercase;
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.uploadButton:hover {
+  background-color: #1565c0;
+  cursor: pointer;
+}
+
+.uploadButtonDark {
+  background-color: #90caf9;
+  border-radius: 4px;
+  color: #000000de;
+  font-family: Roboto , Helvetica , Arial , sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 8px 16px;
+  text-transform: uppercase;
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.uploadButtonDark:hover {
+  background-color: #42a5f5;
+  cursor: pointer;
+}
+
 .button {
   align-self: flex-end;
   font-size: 10px;
@@ -68,6 +108,27 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+.themeButtonContainer {
+  display: flex;
+  margin: 12px 0 0 12px;
+}
+
+.priceContainer {
+  align-items: center;
+  display: flex;
+  font-family: Roboto , Helvetica , Arial , sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  gap: 11px;
+  justify-content: center;
+  padding: 16px 0 32px;
+  text-transform: uppercase;
+}
+
+.priceContainer > p {
+  height: fit-content;
 }
 
 @media ( width >= 1280px ) {
