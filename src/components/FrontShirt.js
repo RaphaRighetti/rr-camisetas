@@ -28,7 +28,8 @@ export default function FrontShirt() {
       setWidthAxis={ setWidthAxis }
       imgUrl={ imgUrl }
       setImgUrl={ setImgUrl }
-      lightImage="/camisetaLisa.png"
+      lightImage="/cotton-front-light.png"
+      darkImage="/cotton-front-dark.png"
     />
   );
 }

@@ -19,13 +19,15 @@ export default function Shirt(props) {
     imgUrl,
     setImgUrl,
     conversion,
+    darkImage,
   } = props;
   const { color, setColor, theme, setPrice } = useContext(HomeContext);
-  const IMG_MAX_WIDTH = 520;
+  const IMG_MEDIUM_WIDTH = 520;
+  const IMG_MAX_WIDTH = 660;
+  const VIEW_PORT_HIGH = 1280;
 
   useEffect(() => {
-    const VIEW_PORT_HIGH = 1280;
-    if (parseFloat(window.innerWidth) < IMG_MAX_WIDTH) {
+    if (parseFloat(window.innerWidth) < IMG_MEDIUM_WIDTH) {
       setXAxis(`${Math.round(window.innerWidth / conversion.x)}`);
       setYAxis(`${Math.round(window.innerWidth / conversion.y)}`);
       setWidthAxis(`${Math.round(window.innerWidth / conversion.width)}`);
@@ -34,22 +36,23 @@ export default function Shirt(props) {
       if (isFront) {
         setXAxis('360');
         setYAxis('190');
-        setWidthAxis('80');
+        setWidthAxis('100');
       } else {
-        setXAxis('260');
-        setYAxis('190');
-        setWidthAxis('80');
+        setXAxis('230');
+        setYAxis('150');
+        setWidthAxis('190');
       }
     }
   }, []);
 
   useEffect(() => {
     const { innerWidth } = window;
-    const shirtWidth = innerWidth < IMG_MAX_WIDTH ? innerWidth : IMG_MAX_WIDTH;
+    let shirtWidth = innerWidth < IMG_MEDIUM_WIDTH ? innerWidth : IMG_MEDIUM_WIDTH;
+    shirtWidth = innerWidth >= VIEW_PORT_HIGH ? IMG_MAX_WIDTH : shirtWidth;
     const [frontShirtLogo, backShirtLogo] = [...document.querySelectorAll('#shirtLogo')];
     const BASE_SHIRT_PRICE = 29.9;
     const BASE_AREA_PRICE = 0.001384;
-    const AREA_VALUE = (BASE_AREA_PRICE * (IMG_MAX_WIDTH ** 2)) / (shirtWidth ** 2);
+    const AREA_VALUE = (BASE_AREA_PRICE * (IMG_MEDIUM_WIDTH ** 2)) / (shirtWidth ** 2);
     const FRONT_LOGO_PRICE = frontShirtLogo.width * frontShirtLogo.height * AREA_VALUE;
     const BACK_LOGO_PRICE = backShirtLogo.width * backShirtLogo.height * AREA_VALUE;
     const currentPrice = BASE_SHIRT_PRICE + FRONT_LOGO_PRICE + BACK_LOGO_PRICE;
@@ -161,10 +164,10 @@ export default function Shirt(props) {
       </div>
       <div
         className={ styles.shirtBox }
-        style={ { backgroundColor: color, opacity: isFront ? '1.0' : '0.9' } }
+        style={ { backgroundColor: color } }
       >
         <img
-          src={ lightImage }
+          src={ theme ? lightImage : darkImage }
           alt="shirt"
           className={ styles.shirtImg }
         />
@@ -183,6 +186,7 @@ export default function Shirt(props) {
 Shirt.propTypes = {
   isFront: PropTypes.bool.isRequired,
   lightImage: PropTypes.string.isRequired,
+  darkImage: PropTypes.string.isRequired,
   logo: PropTypes.string.isRequired,
   setLogo: PropTypes.func.isRequired,
   xAxis: PropTypes.string.isRequired,
