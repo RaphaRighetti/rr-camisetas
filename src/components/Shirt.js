@@ -31,9 +31,15 @@ export default function Shirt(props) {
       setWidthAxis(`${Math.round(window.innerWidth / conversion.width)}`);
     }
     if (parseFloat(window.innerWidth) >= VIEW_PORT_HIGH) {
-      setXAxis('360');
-      setYAxis('190');
-      setWidthAxis('80');
+      if (isFront) {
+        setXAxis('360');
+        setYAxis('190');
+        setWidthAxis('80');
+      } else {
+        setXAxis('260');
+        setYAxis('190');
+        setWidthAxis('80');
+      }
     }
   }, []);
 
