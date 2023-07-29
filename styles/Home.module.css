@@ -1,7 +1,35 @@
+@keyframes appear {
+
+  0% {
+    opacity: 0;
+    top: -5px;
+  }
+
+  70% {
+    opacity: 1;
+    top: -15px;
+  }
+
+  100% {
+    opacity: 0;
+    top: -17px;
+  }
+}
+
 .main {
   align-items: center;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  padding-top: 8px;
+  width: 100%;
+}
+
+.shirtContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   padding-top: 8px;
   width: 100%;
 }
@@ -118,22 +146,42 @@
 .priceContainer {
   align-items: center;
   display: flex;
+  flex-direction: column;
   font-family: Roboto , Helvetica , Arial , sans-serif;
   font-size: 16px;
-  font-weight: 900;
+  font-weight: 500;
   gap: 11px;
   justify-content: center;
-  padding: 16px 0 32px;
-  text-transform: uppercase;
+  padding: 16px 0 56px;
+  text-transform: capitalize;
 }
 
-.priceContainer > p {
-  height: fit-content;
+.confirmOrderBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  padding: 0 16px;
+  position: relative;
+}
+
+.confirmOrderBox > span {
+  opacity: 0;
+  position: absolute;
+}
+
+.enterValidEmail {
+  animation: appear 0.8s;
+  color: rgb(226, 9, 9);
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0;
+  position: absolute;
+  text-transform: none;
 }
 
 @media ( width >= 1280px ) {
 
-  .main {
+  .shirtContainer {
     flex-direction: row;
     justify-content: center;
   }
@@ -145,6 +193,28 @@
 
   .shirtImg {
     width: 660px;
+  }
+
+}
+
+@media ( width < 520px ) {
+
+  .shirtBox {
+    max-height: 95vw;
+    max-width: 95vw;
+  }
+
+  .shirtImg {
+    max-width: 95vw;
+  }
+
+}
+
+@media ( width < 380px ) {
+
+  .inputBoxThree {
+    align-self: flex-start;
+    padding-left: 16px;
   }
 
 }

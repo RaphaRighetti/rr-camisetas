@@ -7,6 +7,7 @@ import BackShirt from '../src/components/BackShirt';
 import HomeContext from '../src/context/HomeContext';
 import ThemeButton from '../src/components/ThemeButton';
 import PriceContainer from '../src/components/PriceContainer';
+import styles from '../styles/Home.module.css';
 
 export default function Home() {
   const INITIAL_PRICE = 49.9;
@@ -28,9 +29,11 @@ export default function Home() {
         <CssBaseline />
         <Header />
         <ThemeButton />
-        <FrontShirt />
-        <BackShirt />
-        <PriceContainer />
+        <main className={ styles.main }>
+          <FrontShirt />
+          <BackShirt />
+          <PriceContainer />
+        </main>
       </ThemeProvider>
     </HomeContext.Provider>
   );

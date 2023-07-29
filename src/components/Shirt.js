@@ -22,15 +22,17 @@ export default function Shirt(props) {
     darkImage,
   } = props;
   const { color, setColor, theme, setPrice } = useContext(HomeContext);
-  const IMG_MEDIUM_WIDTH = 520;
+  const IMG_MID_WIDTH = 520;
   const IMG_MAX_WIDTH = 660;
   const VIEW_PORT_HIGH = 1280;
+  const SHIRT_PERCENT_VW = 0.95;
 
   useEffect(() => {
-    if (parseFloat(window.innerWidth) < IMG_MEDIUM_WIDTH) {
-      setXAxis(`${Math.round(window.innerWidth / conversion.x)}`);
-      setYAxis(`${Math.round(window.innerWidth / conversion.y)}`);
-      setWidthAxis(`${Math.round(window.innerWidth / conversion.width)}`);
+    if (parseFloat(window.innerWidth) < IMG_MID_WIDTH) {
+      const IMG_WIDTH = window.innerWidth * SHIRT_PERCENT_VW;
+      setXAxis(`${Math.round(IMG_WIDTH / conversion.x)}`);
+      setYAxis(`${Math.round(IMG_WIDTH / conversion.y)}`);
+      setWidthAxis(`${Math.round(IMG_WIDTH / conversion.width)}`);
     }
     if (parseFloat(window.innerWidth) >= VIEW_PORT_HIGH) {
       if (isFront) {
@@ -47,12 +49,13 @@ export default function Shirt(props) {
 
   useEffect(() => {
     const { innerWidth } = window;
-    let shirtWidth = innerWidth < IMG_MEDIUM_WIDTH ? innerWidth : IMG_MEDIUM_WIDTH;
+    let shirtWidth = innerWidth < IMG_MID_WIDTH
+      ? innerWidth * SHIRT_PERCENT_VW : IMG_MID_WIDTH;
     shirtWidth = innerWidth >= VIEW_PORT_HIGH ? IMG_MAX_WIDTH : shirtWidth;
     const [frontShirtLogo, backShirtLogo] = [...document.querySelectorAll('#shirtLogo')];
     const BASE_SHIRT_PRICE = 29.9;
     const BASE_AREA_PRICE = 0.001384;
-    const AREA_VALUE = (BASE_AREA_PRICE * (IMG_MEDIUM_WIDTH ** 2)) / (shirtWidth ** 2);
+    const AREA_VALUE = (BASE_AREA_PRICE * (IMG_MID_WIDTH ** 2)) / (shirtWidth ** 2);
     const FRONT_LOGO_PRICE = frontShirtLogo.width * frontShirtLogo.height * AREA_VALUE;
     const BACK_LOGO_PRICE = backShirtLogo.width * backShirtLogo.height * AREA_VALUE;
     const currentPrice = BASE_SHIRT_PRICE + FRONT_LOGO_PRICE + BACK_LOGO_PRICE;
@@ -89,7 +92,7 @@ export default function Shirt(props) {
   };
 
   return (
-    <main className={ styles.main }>
+    <div className={ styles.shirtContainer }>
       <div className={ styles.inputContainer }>
         <input
           type="color"
@@ -166,20 +169,24 @@ export default function Shirt(props) {
         className={ styles.shirtBox }
         style={ { backgroundColor: color } }
       >
-        <img
-          src={ theme ? lightImage : darkImage }
-          alt="shirt"
-          className={ styles.shirtImg }
-        />
-        <img
-          src={ logo }
-          alt="logo"
-          id="shirtLogo"
-          style={ { left: `${xAxis}px`, top: `${yAxis}px`, width: `${widthAxis}px` } }
-          className={ styles.logoImg }
-        />
+        <picture>
+          <img
+            src={ theme ? lightImage : darkImage }
+            alt="shirt"
+            className={ styles.shirtImg }
+          />
+        </picture>
+        <picture>
+          <img
+            src={ logo }
+            alt="logo"
+            id="shirtLogo"
+            style={ { left: `${xAxis}px`, top: `${yAxis}px`, width: `${widthAxis}px` } }
+            className={ styles.logoImg }
+          />
+        </picture>
       </div>
-    </main>
+    </div>
   );
 }
 

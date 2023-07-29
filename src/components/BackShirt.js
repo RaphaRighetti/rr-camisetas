@@ -9,8 +9,8 @@ export default function FrontShirt() {
   const [imgUrl, setImgUrl] = useState('');
 
   const conversion = {
-    x: 2.9,
-    y: 5.2,
+    x: 2.8,
+    y: 4.4,
     width: 3.5,
   };
 
