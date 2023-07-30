@@ -1,8 +1,35 @@
+@keyframes appear {
+
+  0% {
+    opacity: 0;
+    top: -5px;
+  }
+
+  70% {
+    opacity: 1;
+    top: -15px;
+  }
+
+  100% {
+    opacity: 0;
+    top: -17px;
+  }
+}
+
 .main {
   align-items: center;
-  background-color: white;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  padding-top: 8px;
+  width: 100%;
+}
+
+.shirtContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   padding-top: 8px;
   width: 100%;
 }
@@ -52,6 +79,47 @@
   padding: 0 16px;
 }
 
+.inputBoxThree {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  margin: 12px 0;
+}
+
+.uploadButton {
+  background-color: #1976d2;
+  border-radius: 4px;
+  color: white;
+  font-family: Roboto , Helvetica , Arial , sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 8px 16px;
+  text-transform: uppercase;
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.uploadButton:hover {
+  background-color: #1565c0;
+  cursor: pointer;
+}
+
+.uploadButtonDark {
+  background-color: #90caf9;
+  border-radius: 4px;
+  color: #000000de;
+  font-family: Roboto , Helvetica , Arial , sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 8px 16px;
+  text-transform: uppercase;
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.uploadButtonDark:hover {
+  background-color: #42a5f5;
+  cursor: pointer;
+}
+
 .button {
   align-self: flex-end;
   font-size: 10px;
@@ -70,9 +138,70 @@
   flex-direction: column;
 }
 
+.themeButtonContainer {
+  display: flex;
+  margin: 12px 0 0 12px;
+}
+
+.priceContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: Roboto , Helvetica , Arial , sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  gap: 11px;
+  justify-content: center;
+  padding: 16px 0 56px;
+  text-transform: capitalize;
+}
+
+.confirmOrderBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  padding: 0 16px;
+  position: relative;
+}
+
+.confirmOrderBox > span {
+  opacity: 0;
+  position: absolute;
+}
+
+.enterValidEmail {
+  animation: appear 0.8s;
+  color: rgb(226, 9, 9);
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0;
+  position: absolute;
+  text-transform: none;
+}
+
+.emailErrorMsg {
+  animation: appear 0.8s;
+  color: rgb(226, 9, 9);
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0;
+  position: absolute;
+  text-transform: none;
+}
+
+.emailSentMsg {
+  animation: appear 0.8s;
+  color: rgb(0, 198, 0);
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0;
+  position: absolute;
+  text-transform: none;
+}
+
 @media ( width >= 1280px ) {
 
-  .main {
+  .shirtContainer {
     flex-direction: row;
     justify-content: center;
   }
@@ -84,6 +213,28 @@
 
   .shirtImg {
     width: 660px;
+  }
+
+}
+
+@media ( width < 520px ) {
+
+  .shirtBox {
+    max-height: 95vw;
+    max-width: 95vw;
+  }
+
+  .shirtImg {
+    max-width: 95vw;
+  }
+
+}
+
+@media ( width < 380px ) {
+
+  .inputBoxThree {
+    align-self: flex-start;
+    padding-left: 16px;
   }
 
 }
