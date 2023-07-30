@@ -179,6 +179,26 @@
   text-transform: none;
 }
 
+.emailErrorMsg {
+  animation: appear 0.8s;
+  color: rgb(226, 9, 9);
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0;
+  position: absolute;
+  text-transform: none;
+}
+
+.emailSentMsg {
+  animation: appear 0.8s;
+  color: rgb(0, 198, 0);
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0;
+  position: absolute;
+  text-transform: none;
+}
+
 @media ( width >= 1280px ) {
 
   .shirtContainer {

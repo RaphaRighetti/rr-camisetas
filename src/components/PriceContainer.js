@@ -1,28 +1,53 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, TextField } from '@mui/material';
+import emailjs from '@emailjs/browser';
 import HomeContext from '../context/HomeContext';
 import styles from '../../styles/Home.module.css';
 
 export default function PriceContainer() {
-  const { price } = useContext(HomeContext);
+  const { price, SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY } = useContext(HomeContext);
   const [emailInput, setEmailInput] = useState('');
-  const [emailClassName, setEmailClassName] = useState('INVALID_CLASS');
+  const [validEmailMsg, setValidEmailMsg] = useState('INVALID_CLASS');
+  const [emailErrorMsg, setEmailErrorMsg] = useState('INVALID_CLASS');
+  const [emailSentMsg, setEmailSentMsg] = useState('INVALID_CLASS');
   const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
-    if (emailClassName === '') {
-      setEmailClassName(styles.enterValidEmail);
+    if (validEmailMsg === '') {
+      setValidEmailMsg(styles.enterValidEmail);
+    } else if (emailErrorMsg === '') {
+      setEmailErrorMsg(styles.emailErrorMsg);
+    } else if (emailSentMsg === '') {
+      setEmailSentMsg(styles.emailSentMsg);
     }
-  }, [emailClassName]);
+  }, [validEmailMsg, emailErrorMsg, emailSentMsg]);
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     setIsDisabled(true);
     const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
     if (!emailRegex.test(emailInput)) {
-      setEmailClassName('');
+      setValidEmailMsg('');
+      return setIsDisabled(false);
+    }
+
+    const STATUS_SUCCESS = 200;
+    const templateParams = {
+      customer_email: emailInput,
+      price: price.toLocaleString('pt-BR', { style: 'currency', currency: 'brl' }),
+    };
+    try {
+      const response = await emailjs
+        .send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      if (response.status === STATUS_SUCCESS) {
+        setEmailSentMsg('');
+      } else {
+        setEmailErrorMsg('');
+      }
+    } catch (err) {
+      setEmailErrorMsg('');
+    } finally {
       setIsDisabled(false);
     }
-    setIsDisabled(false);
   };
 
   return (
@@ -35,12 +60,18 @@ export default function PriceContainer() {
         </p>
       </div>
       <div className={ styles.confirmOrderBox }>
-        <span className={ emailClassName }>
+        <span className={ validEmailMsg }>
           Enter a valid e-mail!
+        </span>
+        <span className={ emailErrorMsg }>
+          An error has occurred!
+        </span>
+        <span className={ emailSentMsg }>
+          Email sent!
         </span>
         <TextField
           label="Your email"
-          type="text"
+          type="email"
           variant="standard"
           value={ emailInput }
           onChange={ ({ target }) => setEmailInput(target.value) }
